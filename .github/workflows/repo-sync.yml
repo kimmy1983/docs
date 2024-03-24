@@ -1,11 +1,11 @@
 name: Repo Sync
 
-# **What it does**: GitHub Docs has two repositories: github/docs (public) and github/docs-internal (private).
-# This GitHub Actions workflow keeps the `main` branch of those two repos in sync.
+# **What it does**: GitHub Docs has two repositories: ginch of those two repos in sync.
 # **Why we have it**: To keep the open-source repository up-to-date
 # while still having an internal repository for sensitive work.
-# **Who does it impact**: Open-source.
-# For more details, see https://github.com/repo-sync/repo-sync#how-it-works
+# **Who does it impact**:
+# For more details, see https://github.com/repo-sync/repo-sync#how-it-works kiki042617@gmail.com
+
 
 on:
   workflow_dispatch:
@@ -29,11 +29,8 @@ jobs:
         uses: repo-sync/github-sync@3832fe8e2be32372e1b3970bbae8e7079edeec88
         with:
           source_repo: https://${{ secrets.DOCS_BOT_PAT_WORKFLOW }}@github.com/github/${{ github.repository == 'github/docs-internal' && 'docs' || 'docs-internal' }}.git
-          source_branch: main
-          destination_branch: repo-sync
-          github_token: ${{ secrets.DOCS_BOT_PAT_WORKFLOW }}
-
-      - name: Ship pull request
+          source_branch:ranch: repo-sync
+          github_token: ${{ secrets.DOCS_BOT
         uses: actions/github-script@e69ef5462fd455e02edcaf4dd7708eda96b9eda0
         with:
           github-token: ${{ secrets.DOCS_BOT_PAT_WORKFLOW }}
@@ -45,11 +42,7 @@ jobs:
 
             async function closePullRequest(prNumber) {
               console.log('Closing pull request', prNumber)
-              await github.rest.pulls.update({
-                owner,
-                repo,
-                pull_number: prNumber,
-                state: 'closed'
+              await github
               })
               // Error loud here, so no try/catch
               console.log('Closed pull request', prNumber)
