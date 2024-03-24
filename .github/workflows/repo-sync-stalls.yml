@@ -1,13 +1,4 @@
-name: Repo Sync Stalls
-
-# **What it does**: This lets us know in Slack if repo-sync doesn't happen in a timely manner.
-# **Why we have it**: We want repo-sync to keep the two repositories in sync with each other.
-# **Who does it impact**: Open-source contributors, docs engineering.
-
-on:
-  workflow_dispatch:
-  schedule:
-    - cron: '20 */2 * * *' # Run every 2nd hour at 20 minutes after
+nd hour at 20 minutes after
 
 permissions:
   contents: read
@@ -15,15 +6,7 @@ permissions:
 
 jobs:
   repo-sync-stalls:
-    if: github.repository == 'github/docs-internal' || github.repository == 'github/docs'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check if repo sync is stalled
-        uses: actions/github-script@e69ef5462fd455e02edcaf4dd7708eda96b9eda0
-        with:
-          script: |
-            let pulls;
-            const owner = context.repo.owner
+    if: github.repository == 'github/docs-wner
             const repo = context.repo.repo
             try {
               pulls = await github.rest.pulls.list({
@@ -39,8 +22,7 @@ jobs:
 
             // Remove all pull requests that don't have the
             // 'automated-reposync-pr' label
-            pulls.data = pulls.data.filter(pr =>
-              pr.labels.some(label => label.name === 'automated-reposync-pr')
+            pulls.data = p === 'automated-reposync-pr')
             )
 
             // Search for pull requests that have been open too long
